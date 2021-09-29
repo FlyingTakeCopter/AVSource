@@ -17,21 +17,21 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class RxJava {
     public void test() {
-        Observable.create(new ObservableOnSubscribe<String>() {
+        ObservableOnSubscribe<String> observableOnSubscribe = new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(ObservableEmitter<String> e) throws Exception {
 
             }
-        })
-        .map(new Function<String, String>() {
+        };
+
+        Function<String, String> function = new Function<String, String>() {
             @Override
             public String apply(String s) throws Exception {
-                return null;
+                return s;
             }
-        })
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new Observer<String>() {
+        };
+
+        Observer<String> observer = new Observer<String>() {
             @Override
             public void onSubscribe(Disposable d) {
 
@@ -51,6 +51,10 @@ public class RxJava {
             public void onComplete() {
 
             }
-        });
+        };
+
+        Observable.create(observableOnSubscribe)
+        .map(function)
+        .subscribe(observer);
     }
 }
