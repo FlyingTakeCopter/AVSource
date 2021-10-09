@@ -14,6 +14,6 @@ public class ObservableCreate<T> extends Observable<T> {
 
     @Override
     protected void subscribeActual(Observer<? super T> observer) {
-        observer.onSubscribe();
+//        observer.onSubscribe();
     }
 }
